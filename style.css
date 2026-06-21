@@ -16,6 +16,115 @@ body {
   overflow: auto;
 }
 
+/* INTRO SCREEN */
+.intro-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background:
+    radial-gradient(circle at top, rgba(0, 132, 255, 0.18), transparent 35%),
+    linear-gradient(180deg, #101827, #05070d);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  color: #ffffff;
+}
+
+.intro-screen.hide {
+  display: none;
+}
+
+.intro-card {
+  width: min(520px, 100%);
+  max-height: 92dvh;
+  overflow-y: auto;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 26px;
+  padding: 22px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(16px);
+}
+
+.intro-badge {
+  width: fit-content;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: rgba(0, 132, 255, 0.18);
+  border: 1px solid rgba(0, 132, 255, 0.35);
+  color: #9ed0ff;
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 14px;
+}
+
+.intro-card h1 {
+  margin: 0 0 12px;
+  font-size: 30px;
+  line-height: 1.1;
+}
+
+.intro-story {
+  margin: 0 0 12px;
+  color: #d6dbea;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.tutorial-box {
+  margin-top: 16px;
+  padding: 14px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.tutorial-box h2 {
+  margin: 0 0 12px;
+  font-size: 18px;
+}
+
+.tutorial-item {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tutorial-item:last-child {
+  border-bottom: none;
+}
+
+.tutorial-item strong {
+  display: block;
+  font-size: 14px;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+
+.tutorial-item span {
+  display: block;
+  font-size: 13px;
+  color: #c6cede;
+  line-height: 1.45;
+}
+
+.start-btn {
+  width: 100%;
+  border: none;
+  margin-top: 18px;
+  padding: 14px;
+  border-radius: 18px;
+  background: #0084ff;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.start-btn:active {
+  transform: scale(0.98);
+}
+
+/* APP */
 .phone-app {
   width: 100%;
   height: 100dvh;
