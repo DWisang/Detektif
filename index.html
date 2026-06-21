@@ -3,157 +3,104 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <title>Detective Messenger</title>
-
   <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
-  <!-- INTRO SCREEN -->
   <div class="intro-screen" id="introScreen">
     <div class="intro-card">
       <div class="intro-badge">Detective Messenger</div>
-
       <h1>Kasus Jam Hilang</h1>
-
       <p class="intro-story">
         Malam itu, Pak Adrian mengadakan makan malam kecil bersama beberapa orang terdekatnya.
         Namun setelah lampu rumah tiba-tiba mati beberapa menit, jam tangan mahal miliknya menghilang.
       </p>
-
       <p class="intro-story">
         Tidak ada kamera yang merekam kejadian. Tidak ada saksi yang melihat langsung.
         Satu-satunya cara menemukan pelaku adalah dengan membaca alibi, mencari kejanggalan,
         dan mengumpulkan bukti lewat percakapan chat.
       </p>
-
       <div class="tutorial-box">
         <h2>Cara Bermain</h2>
-
         <div class="tutorial-item">
           <strong>1. Pilih Kontak</strong>
           <span>Tekan avatar saksi di sidebar kiri untuk mulai chat.</span>
         </div>
-
         <div class="tutorial-item">
           <strong>2. Ajukan Pertanyaan</strong>
           <span>Pilih pertanyaan di bagian bawah chat untuk menggali informasi.</span>
         </div>
-
         <div class="tutorial-item">
           <strong>3. Kumpulkan Bukti</strong>
           <span>Jawaban penting otomatis masuk ke Case Board.</span>
         </div>
-
         <div class="tutorial-item">
           <strong>4. Buka Case Board</strong>
           <span>Tekan tombol dokumen di kanan atas untuk melihat bukti dan menuduh pelaku.</span>
         </div>
-
         <div class="tutorial-item">
           <strong>5. Tuduh Pelaku</strong>
           <span>Pilih tersangka jika bukti sudah cukup. Minimal butuh 5 bukti.</span>
         </div>
       </div>
-
-      <button class="start-btn" type="button" id="startBtn">
-        Mulai Investigasi
-      </button>
+      <button class="start-btn" type="button" id="startBtn">Mulai Investigasi</button>
     </div>
   </div>
 
   <div class="phone-app">
-    <!-- STATUS BAR ANDROID -->
     <div class="status-bar">
       <div id="clock">09:41</div>
-
       <div class="status-icons">
-        <div class="signal">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-
-        <div class="battery">
-          <div class="battery-level"></div>
-        </div>
+        <div class="signal"><span></span><span></span><span></span><span></span></div>
+        <div class="battery"><div class="battery-level"></div></div>
       </div>
     </div>
 
-    <!-- MAIN APP -->
     <div class="app-layout">
-      <!-- SIDEBAR KONTAK -->
       <aside class="sidebar">
         <div class="sidebar-logo">
           <div class="logo-circle">
-            <svg viewBox="0 0 24 24">
-              <path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"></path>
-            </svg>
+            <svg viewBox="0 0 24 24"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"></path></svg>
           </div>
         </div>
-
         <div class="contact-list" id="contacts"></div>
       </aside>
 
-      <!-- AREA CHAT -->
       <main class="chat">
         <div class="chat-header">
           <div class="chat-person">
             <div class="header-avatar" id="headerAvatar"></div>
-
             <div class="chat-info">
               <div class="chat-name" id="chatName">Pilih kontak</div>
               <div class="chat-status" id="chatRole">Online</div>
             </div>
           </div>
-
           <div class="chat-actions">
             <button class="icon-btn" type="button" title="Call">
-              <svg viewBox="0 0 24 24">
-                <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.7 19.7 0 0 1-8.6-3.1A19.3 19.3 0 0 1 5.2 13 19.7 19.7 0 0 1 2.1 4.4A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7l.5 3a2 2 0 0 1-.6 1.8L7.7 9.8a16 16 0 0 0 6.5 6.5l1.3-1.3a2 2 0 0 1 1.8-.6l3 .5A2 2 0 0 1 22 16.9z"></path>
-              </svg>
+              <svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.7 19.7 0 0 1-8.6-3.1A19.3 19.3 0 0 1 5.2 13 19.7 19.7 0 0 1 2.1 4.4A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7l.5 3a2 2 0 0 1-.6 1.8L7.7 9.8a16 16 0 0 0 6.5 6.5l1.3-1.3a2 2 0 0 1 1.8-.6l3 .5A2 2 0 0 1 22 16.9z"></path></svg>
             </button>
-
             <button class="icon-btn case-icon" type="button" title="Case Board" id="caseBtn">
-              <svg viewBox="0 0 24 24">
-                <rect x="5" y="3" width="14" height="18" rx="2"></rect>
-                <path d="M9 8h6"></path>
-                <path d="M9 12h6"></path>
-                <path d="M9 16h4"></path>
-              </svg>
+              <svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"></rect><path d="M9 8h6"></path><path d="M9 12h6"></path><path d="M9 16h4"></path></svg>
             </button>
           </div>
         </div>
-
         <div class="chat-window" id="chatWindow">
           <div class="system-msg">Pilih kontak di kiri untuk mulai interogasi</div>
         </div>
-
         <div class="choice-area" id="choiceArea"></div>
       </main>
 
-      <!-- OVERLAY DRAWER -->
       <div class="drawer-overlay" id="drawerOverlay"></div>
 
-      <!-- CASE BOARD -->
       <aside class="case-board" id="caseBoard">
         <div class="case-header">
           <div class="case-title">Case Board</div>
-
-          <div class="case-desc">
-            Kumpulkan bukti dari chat, cocokkan alibi, lalu tentukan siapa pelaku sebenarnya.
-          </div>
-
+          <div class="case-desc">Kumpulkan bukti dari chat, cocokkan alibi, lalu tentukan siapa pelaku sebenarnya.</div>
           <div class="progress" id="progressText">Bukti: 0/9</div>
         </div>
-
         <div class="evidence-list" id="evidenceList"></div>
-
         <div class="accuse-box">
           <h3>Tuduh Pelaku</h3>
-
           <select id="suspectSelect">
             <option value="">Pilih tersangka</option>
             <option value="Raka">Raka</option>
@@ -161,15 +108,8 @@
             <option value="Doni">Doni</option>
             <option value="Sinta">Sinta</option>
           </select>
-
-          <button class="accuse-btn" type="button" id="accuseBtn">
-            Tuduh Sekarang
-          </button>
-
-          <button class="restart-btn" type="button" id="restartBtn">
-            Restart
-          </button>
-
+          <button class="accuse-btn" type="button" id="accuseBtn">Tuduh Sekarang</button>
+          <button class="restart-btn" type="button" id="restartBtn">Restart</button>
           <div class="result" id="result">Belum ada keputusan.</div>
         </div>
       </aside>
