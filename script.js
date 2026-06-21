@@ -35,6 +35,8 @@ const suspects = {
       },
       {
         text: "Kenapa Bima bilang kamu sempat ke koridor?",
+        requiresEvidence: ["bima_uncertain_silhouette"],
+        lockedText: "Butuh keterangan Bima dulu tentang siluet di koridor.",
         answer:
           "Aku ke koridor sebelum lampu mati, bukan saat gelap. Aku ambil jaket dari kursi dekat pintu. Kalau dia bilang saat gelap, berarti dia salah lihat atau sengaja bikin aku terlihat buruk.",
         evidence: {
@@ -175,6 +177,8 @@ const suspects = {
       },
       {
         text: "Kenapa ada yang bilang kamu keluar halaman?",
+        requiresEvidence: ["doni_camera_2026"],
+        lockedText: "Butuh rekaman/keterangan Bima tentang Doni di halaman.",
         answer:
           "Saya keluar setelah lampu nyala, bukan saat gelap. Saya panik karena pesan dari kantor masuk terus. Itu memang terlihat buruk, tapi bukan berarti saya ambil jam.",
         evidence: {
@@ -239,6 +243,8 @@ const suspects = {
       },
       {
         text: "Kenapa Mira bilang kamu masuk dapur?",
+        requiresEvidence: ["sinta_in_kitchen"],
+        lockedText: "Butuh keterangan Mira dulu bahwa Sinta masuk dapur.",
         answer:
           "Aku cuma ambil tisu. Tanganku kena saus. Aku tidak buka laci atau sentuh apa pun di dapur.",
         evidence: {
@@ -251,6 +257,8 @@ const suspects = {
       },
       {
         text: "Ada serat merah muda dekat piano. Kamu tahu?",
+        requiresEvidence: ["pink_fiber_piano"],
+        lockedText: "Butuh bukti serat merah muda dari Mira dulu.",
         answer:
           "Banyak orang pakai warna terang malam itu. Jangan karena aku pakai scarf pink lalu semua diarahkan ke aku.",
         evidence: {
@@ -760,6 +768,8 @@ let evidence = [];
 let askedQuestions = {};
 let chatLogs = {};
 let unlockedNoticesShown = {};
+let pendingReplies = {};
+let toastTimer = null;
 
 let contacts;
 let chatWindow;
@@ -814,12 +824,14 @@ function initGame() {
   askedQuestions = {};
   chatLogs = {};
   unlockedNoticesShown = {};
+  pendingReplies = {};
   currentSuspect = null;
 
   Object.keys(suspects).forEach((name) => {
     askedQuestions[name] = [];
     chatLogs[name] = [];
     unlockedNoticesShown[name] = [];
+    pendingReplies[name] = false;
 
     const button = document.createElement("button");
     button.className = "contact";
@@ -919,6 +931,19 @@ function renderChatLog(name) {
       chatWindow.appendChild(div);
     }
 
+    if (entry.kind === "typing") {
+      const row = document.createElement("div");
+      row.className = "msg-row npc typing-row";
+      row.dataset.typingId = entry.id;
+      row.innerHTML = `
+        ${avatar(entry.speaker, "mini-avatar")}
+        <div class="typing-bubble">
+          <span></span><span></span><span></span>
+        </div>
+      `;
+      chatWindow.appendChild(row);
+    }
+
     if (entry.kind === "message") {
       const row = document.createElement("div");
       row.className = "msg-row " + entry.sender;
@@ -943,7 +968,8 @@ function maybeShowUnlockedNotice(name) {
   const unlockedQuestions = suspects[name].questions
     .map((question, index) => ({ question, index }))
     .filter(({ question, index }) => {
-      return questionUnlocked(question) && !askedQuestions[name].includes(index);
+      const isBranchQuestion = question.requiresEvidence && question.requiresEvidence.length > 0;
+      return isBranchQuestion && questionUnlocked(question) && !askedQuestions[name].includes(index);
     });
 
   const already = unlockedNoticesShown[name] || [];
@@ -964,20 +990,81 @@ function scrollChatToBottom() {
   });
 }
 
-function addSystem(text) {
-  if (currentSuspect) {
-    pushLog(currentSuspect, { kind: "system", text });
-  }
-  const div = document.createElement("div");
-  div.className = "system-msg";
-  div.textContent = text;
-  chatWindow.appendChild(div);
-  scrollChatToBottom();
+function makeTypingId() {
+  return "typing_" + Date.now() + "_" + Math.floor(Math.random() * 100000);
 }
 
-function addMessage(name, text, sender) {
-  if (currentSuspect) {
-    pushLog(currentSuspect, { kind: "message", speaker: name, sender, text });
+function addTypingTo(targetSuspect) {
+  const id = makeTypingId();
+  pushLog(targetSuspect, { kind: "typing", id, speaker: targetSuspect });
+
+  if (currentSuspect === targetSuspect) {
+    renderChatLog(targetSuspect);
+  }
+
+  return id;
+}
+
+function removeTypingFrom(targetSuspect, typingId) {
+  if (!chatLogs[targetSuspect]) return;
+
+  chatLogs[targetSuspect] = chatLogs[targetSuspect].filter((entry) => {
+    return !(entry.kind === "typing" && entry.id === typingId);
+  });
+
+  if (currentSuspect === targetSuspect) {
+    renderChatLog(targetSuspect);
+  }
+}
+
+function showToast(title, message) {
+  let toast = document.getElementById("replyToast");
+
+  if (!toast) {
+    toast = document.createElement("div");
+    toast.id = "replyToast";
+    toast.className = "reply-toast";
+    document.body.appendChild(toast);
+  }
+
+  toast.innerHTML = `
+    <div class="toast-title">${title}</div>
+    <div class="toast-message">${message}</div>
+  `;
+
+  toast.classList.add("show");
+
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => {
+    toast.classList.remove("show");
+  }, 2300);
+}
+
+function getReplyDelay() {
+  return 950 + Math.floor(Math.random() * 850);
+}
+
+function addSystemTo(targetSuspect, text) {
+  if (!targetSuspect) return;
+
+  pushLog(targetSuspect, { kind: "system", text });
+
+  if (currentSuspect === targetSuspect) {
+    const div = document.createElement("div");
+    div.className = "system-msg";
+    div.textContent = text;
+    chatWindow.appendChild(div);
+    scrollChatToBottom();
+  }
+}
+
+function addMessageTo(targetSuspect, speaker, text, sender) {
+  if (!targetSuspect) return;
+
+  pushLog(targetSuspect, { kind: "message", speaker, sender, text });
+
+  if (currentSuspect !== targetSuspect) {
+    return;
   }
 
   const row = document.createElement("div");
@@ -985,7 +1072,7 @@ function addMessage(name, text, sender) {
 
   if (sender === "npc") {
     row.innerHTML = `
-      ${avatar(name, "mini-avatar")}
+      ${avatar(speaker, "mini-avatar")}
       <div class="bubble npc">${text}</div>
     `;
   } else {
@@ -996,9 +1083,26 @@ function addMessage(name, text, sender) {
   scrollChatToBottom();
 }
 
+function addSystem(text) {
+  addSystemTo(currentSuspect, text);
+}
+
+function addMessage(name, text, sender) {
+  addMessageTo(currentSuspect, name, text, sender);
+}
+
 function renderChoices() {
   choiceArea.innerHTML = "";
   if (!currentSuspect) return;
+
+  const isWaitingReply = pendingReplies[currentSuspect];
+
+  if (isWaitingReply) {
+    const wait = document.createElement("div");
+    wait.className = "waiting-reply";
+    wait.textContent = `${suspects[currentSuspect].name} sedang mengetik jawaban...`;
+    choiceArea.appendChild(wait);
+  }
 
   let visibleCount = 0;
 
@@ -1021,6 +1125,9 @@ function renderChoices() {
     } else if (wasAsked) {
       button.disabled = true;
       button.textContent = "Sudah ditanyakan: " + question.text;
+    } else if (isWaitingReply) {
+      button.disabled = true;
+      button.textContent = question.text;
     } else {
       button.textContent = question.text;
       button.addEventListener("click", () => askQuestion(index));
@@ -1043,24 +1150,50 @@ function renderChoices() {
 function askQuestion(index) {
   if (!currentSuspect) return;
 
-  const question = suspects[currentSuspect].questions[index];
-  if (askedQuestions[currentSuspect].includes(index)) return;
+  const suspectName = currentSuspect;
+  const question = suspects[suspectName].questions[index];
+  if (askedQuestions[suspectName].includes(index)) return;
 
-  askedQuestions[currentSuspect].push(index);
+  if (pendingReplies[suspectName]) {
+    addSystemTo(suspectName, `${suspects[suspectName].name} masih mengetik. Tunggu jawabannya dulu.`);
+    renderChoices();
+    return;
+  }
 
-  addMessage(currentSuspect, question.text, "player");
+  if (!questionUnlocked(question)) {
+    addSystemTo(suspectName, question.lockedText ? "Pertanyaan terkunci: " + question.lockedText : "Pertanyaan ini belum terbuka. Cari bukti dari kontak lain dulu.");
+    renderChoices();
+    return;
+  }
+
+  askedQuestions[suspectName].push(index);
+  pendingReplies[suspectName] = true;
+
+  addMessageTo(suspectName, suspectName, question.text, "player");
+  const typingId = addTypingTo(suspectName);
   renderChoices();
 
   setTimeout(() => {
-    addMessage(currentSuspect, question.answer, "npc");
+    removeTypingFrom(suspectName, typingId);
+    addMessageTo(suspectName, suspectName, question.answer, "npc");
+
+    pendingReplies[suspectName] = false;
+
+    showToast(`${suspects[suspectName].name} membalas`, question.answer);
 
     if (question.evidence) {
-      addEvidence(question.evidence);
+      addEvidence(question.evidence, suspectName);
     }
-  }, 450);
+
+    if (currentSuspect === suspectName) {
+      renderChoices();
+    } else {
+      updateContactBadges();
+    }
+  }, getReplyDelay());
 }
 
-function addEvidence(item) {
+function addEvidence(item, sourceSuspect = currentSuspect) {
   const exists = evidence.some((e) => e.id === item.id);
   if (exists) return;
 
@@ -1068,8 +1201,12 @@ function addEvidence(item) {
   renderEvidence();
   updateContactBadges();
 
+  if (currentSuspect) {
+    renderChoices();
+  }
+
   setTimeout(() => {
-    addSystem(`Bukti baru masuk ke Case Board: ${item.type}`);
+    addSystemTo(sourceSuspect, `Bukti baru masuk ke Case Board: ${item.type}`);
   }, 250);
 }
 
