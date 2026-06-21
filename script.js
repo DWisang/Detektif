@@ -1,4 +1,4 @@
-const totalEvidence = 24;
+let totalEvidence = 24;
 const minimumEvidenceToAccuse = 10;
 
 const suspects = {
@@ -499,11 +499,267 @@ const suspects = {
   }
 };
 
+
+function addUnlockedQuestions() {
+  suspects.Raka.questions.push(
+    {
+      text: "Doni dan Livia bilang Sinta muncul dari arah piano. Kamu yakin dengar gelang perempuan?",
+      requiresEvidence: ["sinta_from_piano", "sinta_near_piano_livia"],
+      lockedText: "Butuh keterangan Doni dan Livia tentang posisi Sinta.",
+      answer:
+        "Nah itu cocok. Saat gelap aku dengar bunyi gelang halus dari arah piano, bukan langkah sepatu laki-laki. Aku baru sadar Sinta malam itu pakai gelang tipis dan scarf pink.",
+      evidence: {
+        id: "raka_confirms_female_near_piano",
+        title: "Raka menguatkan sosok perempuan dekat piano",
+        desc:
+          "Setelah dibandingkan dengan keterangan Doni dan Livia, Raka menguatkan bahwa suara yang ia dengar lebih cocok dengan aksesori perempuan di dekat piano.",
+        type: "Kunci"
+      }
+    },
+    {
+      text: "Bima bilang siluet koridor tidak pasti. Kamu masih merasa dijebak?",
+      requiresEvidence: ["bima_uncertain_silhouette"],
+      lockedText: "Butuh keterangan Bima tentang siluet koridor.",
+      answer:
+        "Iya. Makanya dari awal aku bilang jangan langsung percaya. Kalau siluetnya tidak jelas, berarti ada orang yang sengaja membuat fokus ke aku dan Doni.",
+      evidence: {
+        id: "raka_feels_framed",
+        title: "Raka merasa dijadikan pengalih",
+        desc:
+          "Setelah keterangan Bima melemah, dugaan terhadap Raka makin tampak sebagai jalur pengalih, bukan rantai bukti utama.",
+        type: "Analisis"
+      }
+    }
+  );
+
+  suspects.Mira.questions.push(
+    {
+      text: "Sinta bilang cuma ambil tisu. Apakah dia dekat laci kunci panel?",
+      requiresEvidence: ["sinta_tissue_excuse", "breaker_key_missing"],
+      lockedText: "Butuh pengakuan Sinta soal tisu dan bukti kunci panel hilang.",
+      answer:
+        "Kalau dia ambil tisu basah, tempatnya persis di samping laci kunci panel. Dia tidak perlu membuka laci lama-lama. Cukup satu gerakan kecil, saya mungkin tidak sadar.",
+      evidence: {
+        id: "sinta_near_key_drawer",
+        title: "Sinta punya akses langsung ke laci kunci panel",
+        desc:
+          "Alasan mengambil tisu menempatkan Sinta tepat di samping laci kunci panel, sehingga ia punya kesempatan realistis mengambil atau mengembalikan kunci.",
+        type: "Kesempatan"
+      }
+    },
+    {
+      text: "Ada parfum floral dekat panel. Kamu mengenali baunya?",
+      requiresEvidence: ["floral_perfume_panel"],
+      lockedText: "Butuh bukti parfum floral dari Bima.",
+      answer:
+        "Saya tidak mau asal tuduh, tapi bau itu mirip parfum Sinta. Floral manis, cukup kuat. Saat dia masuk dapur, baunya juga tertinggal sebentar.",
+      evidence: {
+        id: "mira_recognizes_sinta_perfume",
+        title: "Mira mengenali parfum floral Sinta",
+        desc:
+          "Mira menghubungkan bau parfum floral di area panel dengan parfum Sinta, memperkuat hubungan Sinta dengan lokasi pemadaman.",
+        type: "Fisik"
+      }
+    }
+  );
+
+  suspects.Doni.questions.push(
+    {
+      text: "Bima punya rekaman kamu keluar pukul 20:26. Bisa jelaskan waktunya?",
+      requiresEvidence: ["doni_camera_2026"],
+      lockedText: "Butuh bukti kamera halaman dari Bima.",
+      answer:
+        "Itu bukti aku keluar setelah lampu menyala. Kalau aku pencurinya, kenapa aku baru keluar setelah semua orang bisa melihat? Aku memang panik, tapi bukan kabur saat gelap.",
+      evidence: {
+        id: "doni_timeline_defense",
+        title: "Timeline Doni makin kuat",
+        desc:
+          "Doni menggunakan rekaman halaman untuk membela diri: ia keluar setelah lampu menyala, bukan saat ruang tengah gelap.",
+        type: "Alibi"
+      }
+    },
+    {
+      text: "Sinta terus menyebut kamu. Menurutmu kenapa?",
+      requiresEvidence: ["sinta_accuses_doni", "too_obvious_doni"],
+      lockedText: "Butuh tuduhan Sinta dan analisis Livia soal Doni terlalu jelas.",
+      answer:
+        "Karena saya target paling mudah. Semua orang tahu masalah invoice. Kalau pencurinya pintar, dia tinggal buat saya terlihat seperti pelaku yang paling masuk akal.",
+      evidence: {
+        id: "doni_as_easy_target",
+        title: "Doni menjadi target tuduhan paling mudah",
+        desc:
+          "Doni punya motif yang terlalu jelas, sehingga ia cocok dijadikan kambing hitam oleh pelaku yang ingin mengalihkan fokus.",
+        type: "Analisis"
+      }
+    }
+  );
+
+  suspects.Sinta.questions.push(
+    {
+      text: "Raka dengar suara gelang perempuan dekat piano. Kamu pakai gelang malam itu?",
+      requiresEvidence: ["bracelet_sound_piano"],
+      lockedText: "Butuh keterangan Raka soal suara gelang dekat piano.",
+      answer:
+        "Aku memang pakai gelang, tapi banyak perempuan pakai aksesori. Suara gelang tidak membuktikan aku menyentuh jam, kan?",
+      evidence: {
+        id: "sinta_admits_bracelet",
+        title: "Sinta mengakui memakai gelang",
+        desc:
+          "Sinta mengakui memakai gelang setelah dikonfrontasi dengan suara gelang dekat piano. Jawabannya defensif dan tidak sepenuhnya membantah lokasi.",
+        type: "Kunci"
+      }
+    },
+    {
+      text: "Serat pink dekat piano cocok dengan scarf kamu. Bisa jelaskan?",
+      requiresEvidence: ["pink_fiber_piano", "sinta_pink_scarf"],
+      lockedText: "Butuh bukti serat pink dari Mira dan pengakuan scarf Sinta.",
+      answer:
+        "Scarf bisa rontok di mana saja. Aku lewat ruang tengah berkali-kali sebelum makan. Jangan dibuat seolah-olah serat itu pasti jatuh saat lampu mati.",
+      evidence: {
+        id: "sinta_fiber_defensive",
+        title: "Sinta defensif soal serat scarf",
+        desc:
+          "Sinta tidak membantah kecocokan serat pink, tetapi mencoba menggeser waktunya. Ini membuat bukti fisik tetap relevan.",
+        type: "Fisik"
+      }
+    },
+    {
+      text: "Pak Adrian bilang kamu tahu gravir belakang jam. Kenapa kamu ingat detail itu?",
+      requiresEvidence: ["sinta_knows_engraving"],
+      lockedText: "Butuh keterangan Pak Adrian tentang gravir jam.",
+      answer:
+        "Karena dulu dia pernah cerita. Aku ingat hal-hal kecil, itu saja. Jangan karena aku ingat detail lalu aku dituduh mencuri.",
+      evidence: {
+        id: "sinta_memory_of_engraving",
+        title: "Sinta mengingat detail personal jam",
+        desc:
+          "Sinta mengakui mengingat gravir jam. Ini menguatkan bahwa ia memahami nilai emosional jam, bukan hanya harganya.",
+        type: "Motif"
+      }
+    },
+    {
+      text: "Mira bilang kamu dekat laci kunci panel. Kamu sempat buka laci?",
+      requiresEvidence: ["sinta_near_key_drawer"],
+      lockedText: "Butuh keterangan Mira tentang posisi tisu dan laci kunci.",
+      answer:
+        "Tidak. Aku cuma ambil tisu. Kalau Mira tidak melihat aku buka laci, berarti itu cuma dugaan. Kalian terlalu memaksakan cerita.",
+      evidence: {
+        id: "sinta_denies_key_drawer",
+        title: "Sinta membantah laci kunci tanpa alibi kuat",
+        desc:
+          "Sinta membantah membuka laci, tetapi posisinya tetap memberi kesempatan. Bantahannya tidak menghapus hubungan dengan akses panel.",
+        type: "Kontradiksi"
+      }
+    }
+  );
+
+  suspects.Livia.questions.push(
+    {
+      text: "Kalau Sinta dekat piano, kenapa kamu tidak langsung bilang?",
+      requiresEvidence: ["sinta_from_piano", "sinta_claim_front_door"],
+      lockedText: "Butuh konflik posisi Sinta dari Doni dan klaim Sinta sendiri.",
+      answer:
+        "Karena aku takut salah tuduh. Tapi setelah dengar Sinta mengaku dekat pintu depan, posisinya makin aneh. Aku yakin dia bukan di pintu depan saat lampu nyala lagi.",
+      evidence: {
+        id: "livia_reasserts_sinta_position",
+        title: "Livia menegaskan posisi Sinta janggal",
+        desc:
+          "Setelah klaim Sinta dibandingkan dengan keterangan Doni, Livia makin yakin posisi Sinta dekat piano dan bukan dekat pintu depan.",
+        type: "Kunci"
+      }
+    },
+    {
+      text: "Apakah scarf atau clutch Sinta terlihat berubah setelah lampu nyala?",
+      requiresEvidence: ["sinta_clutch_size", "sinta_pink_scarf"],
+      lockedText: "Butuh bukti clutch dari Bima dan scarf pink dari Sinta.",
+      answer:
+        "Scarf-nya agak kusut, dan clutch-nya dia pegang lebih rapat dari sebelumnya. Dulu sebelum lampu mati, clutch itu dia taruh santai di samping kursi.",
+      evidence: {
+        id: "sinta_clutch_behavior_changed",
+        title: "Perilaku Sinta terhadap clutch berubah",
+        desc:
+          "Livia melihat Sinta memegang clutch lebih rapat setelah lampu menyala. Ini mendukung kemungkinan jam disembunyikan di dalam clutch.",
+        type: "Kesempatan"
+      }
+    }
+  );
+
+  suspects.Bima.questions.push(
+    {
+      text: "Kalau Sinta membawa clutch, apakah ada rekaman dia keluar?",
+      requiresEvidence: ["sinta_clutch_size"],
+      lockedText: "Butuh catatan Bima tentang clutch Sinta.",
+      answer:
+        "Ada. Tapi dia tidak langsung keluar. Dia ke toilet tamu dulu sekitar 20:29, lalu keluar 20:34. Area toilet tidak kena kamera langsung.",
+      evidence: {
+        id: "sinta_toilet_gap",
+        title: "Sinta sempat ke toilet tanpa kamera langsung",
+        desc:
+          "Sinta masuk ke toilet tamu setelah kejadian. Area itu tidak terekam langsung, memberi kesempatan memindahkan atau menyembunyikan jam.",
+        type: "Kronologi"
+      }
+    },
+    {
+      text: "Mira mengenali parfum floral Sinta. Apakah bau itu juga ada dekat toilet?",
+      requiresEvidence: ["mira_recognizes_sinta_perfume", "sinta_toilet_gap"],
+      lockedText: "Butuh pengenalan parfum Mira dan celah toilet Sinta.",
+      answer:
+        "Iya, bau floral yang sama cukup kuat dekat lorong toilet. Saya baru hubungkan setelah Mira menyebut parfum itu.",
+      evidence: {
+        id: "floral_perfume_toilet",
+        title: "Parfum floral juga tercium dekat toilet",
+        desc:
+          "Bau floral muncul di dua lokasi penting: panel listrik dan lorong toilet. Ini menghubungkan jalur gerak Sinta setelah blackout.",
+        type: "Fisik"
+      }
+    }
+  );
+
+  suspects.Adrian.questions.push(
+    {
+      text: "Kalau Sinta tahu gravir, apakah dia tahu jam itu mudah dilepas dari strap?",
+      requiresEvidence: ["sinta_knows_engraving", "watch_piano_tray"],
+      lockedText: "Butuh bukti Sinta tahu gravir dan jam dilepas di nampan piano.",
+      answer:
+        "Dia pernah lihat saya melepas jam itu di acara lama. Strap-nya memang agak sensitif di kulit saya. Jadi dia tahu saya kadang melepasnya saat duduk lama.",
+      evidence: {
+        id: "sinta_knows_watch_habit",
+        title: "Sinta tahu kebiasaan Adrian melepas jam",
+        desc:
+          "Sinta bukan hanya tahu gravir, tetapi juga tahu kebiasaan Pak Adrian melepas jam saat tidak nyaman. Ini menjelaskan kenapa ia siap memanfaatkan momen.",
+        type: "Kunci"
+      }
+    },
+    {
+      text: "Setelah bukti baru ini, apakah Doni masih paling masuk akal?",
+      requiresEvidence: ["doni_timeline_defense", "doni_as_easy_target", "adrian_doubts_doni"],
+      lockedText: "Butuh alibi Doni, analisis Doni sebagai target, dan keraguan korban.",
+      answer:
+        "Tidak. Doni tetap menyebalkan, tapi rantainya tidak utuh. Yang lebih masuk akal adalah orang yang tahu nilai personal jam, punya akses ke panel, dan punya cara menyembunyikannya.",
+      evidence: {
+        id: "adrian_rules_out_doni_chain",
+        title: "Rantai bukti Doni tidak utuh",
+        desc:
+          "Pak Adrian menilai bukti terhadap Doni tidak membentuk rantai lengkap, mengarahkan pemain untuk mencari pelaku dengan motif personal dan kesempatan teknis.",
+        type: "Analisis"
+      }
+    }
+  );
+
+  totalEvidence = Object.values(suspects).reduce((sum, suspect) => {
+    return sum + suspect.questions.filter((q) => q.evidence).length;
+  }, 0);
+}
+
+addUnlockedQuestions();
+
 const correctCulprit = "Sinta";
 
 let currentSuspect = null;
 let evidence = [];
 let askedQuestions = {};
+let chatLogs = {};
+let unlockedNoticesShown = {};
 
 let contacts;
 let chatWindow;
@@ -556,10 +812,14 @@ function initGame() {
   contacts.innerHTML = "";
   evidence = [];
   askedQuestions = {};
+  chatLogs = {};
+  unlockedNoticesShown = {};
   currentSuspect = null;
 
   Object.keys(suspects).forEach((name) => {
     askedQuestions[name] = [];
+    chatLogs[name] = [];
+    unlockedNoticesShown[name] = [];
 
     const button = document.createElement("button");
     button.className = "contact";
@@ -584,6 +844,7 @@ function initGame() {
   result.textContent = "Belum ada keputusan.";
   suspectSelect.value = "";
   renderEvidence();
+  updateContactBadges();
 }
 
 function startGame() {
@@ -615,10 +876,86 @@ function selectSuspect(name) {
   chatRole.textContent = suspects[name].role + " • Aktif";
   headerAvatar.innerHTML = avatar(name, "header-avatar");
 
-  chatWindow.innerHTML = "";
-  addSystem("Interogasi dimulai");
-  addMessage(name, suspects[name].intro, "npc");
+  if (!chatLogs[name] || chatLogs[name].length === 0) {
+    pushLog(name, { kind: "system", text: "Interogasi dimulai" });
+    pushLog(name, { kind: "message", speaker: name, sender: "npc", text: suspects[name].intro });
+  } else {
+    maybeShowUnlockedNotice(name);
+  }
+
+  renderChatLog(name);
   renderChoices();
+}
+
+function hasEvidence(id) {
+  return evidence.some((item) => item.id === id);
+}
+
+function questionUnlocked(question) {
+  if (!question.requiresEvidence || question.requiresEvidence.length === 0) {
+    return true;
+  }
+  return question.requiresEvidence.every((id) => hasEvidence(id));
+}
+
+function countUnlockedQuestions(name) {
+  return suspects[name].questions.filter((q) => questionUnlocked(q)).length;
+}
+
+function pushLog(name, entry) {
+  if (!chatLogs[name]) chatLogs[name] = [];
+  chatLogs[name].push(entry);
+}
+
+function renderChatLog(name) {
+  chatWindow.innerHTML = "";
+  const logs = chatLogs[name] || [];
+
+  logs.forEach((entry) => {
+    if (entry.kind === "system") {
+      const div = document.createElement("div");
+      div.className = "system-msg";
+      div.textContent = entry.text;
+      chatWindow.appendChild(div);
+    }
+
+    if (entry.kind === "message") {
+      const row = document.createElement("div");
+      row.className = "msg-row " + entry.sender;
+
+      if (entry.sender === "npc") {
+        row.innerHTML = `
+          ${avatar(entry.speaker, "mini-avatar")}
+          <div class="bubble npc">${entry.text}</div>
+        `;
+      } else {
+        row.innerHTML = `<div class="bubble player">${entry.text}</div>`;
+      }
+
+      chatWindow.appendChild(row);
+    }
+  });
+
+  scrollChatToBottom();
+}
+
+function maybeShowUnlockedNotice(name) {
+  const unlockedQuestions = suspects[name].questions
+    .map((question, index) => ({ question, index }))
+    .filter(({ question, index }) => {
+      return questionUnlocked(question) && !askedQuestions[name].includes(index);
+    });
+
+  const already = unlockedNoticesShown[name] || [];
+  const newUnlocks = unlockedQuestions.filter(({ index }) => !already.includes(index));
+
+  if (newUnlocks.length > 0 && chatLogs[name] && chatLogs[name].length > 0) {
+    pushLog(name, {
+      kind: "system",
+      text: `${newUnlocks.length} pertanyaan baru terbuka dari bukti karakter lain`
+    });
+    unlockedNoticesShown[name].push(...newUnlocks.map(({ index }) => index));
+  }
 }
 
 function scrollChatToBottom() {
@@ -628,6 +965,9 @@ function scrollChatToBottom() {
 }
 
 function addSystem(text) {
+  if (currentSuspect) {
+    pushLog(currentSuspect, { kind: "system", text });
+  }
   const div = document.createElement("div");
   div.className = "system-msg";
   div.textContent = text;
@@ -636,6 +976,10 @@ function addSystem(text) {
 }
 
 function addMessage(name, text, sender) {
+  if (currentSuspect) {
+    pushLog(currentSuspect, { kind: "message", speaker: name, sender, text });
+  }
+
   const row = document.createElement("div");
   row.className = "msg-row " + sender;
 
@@ -656,20 +1000,44 @@ function renderChoices() {
   choiceArea.innerHTML = "";
   if (!currentSuspect) return;
 
+  let visibleCount = 0;
+
   suspects[currentSuspect].questions.forEach((question, index) => {
+    const isUnlocked = questionUnlocked(question);
+    const wasAsked = askedQuestions[currentSuspect].includes(index);
+
+    if (!isUnlocked && !question.lockedText) {
+      return;
+    }
+
     const button = document.createElement("button");
     button.className = "choice-btn";
     button.type = "button";
-    button.textContent = question.text;
 
-    if (askedQuestions[currentSuspect].includes(index)) {
+    if (!isUnlocked) {
+      button.classList.add("locked-choice");
+      button.disabled = true;
+      button.textContent = "Terkunci: " + question.lockedText;
+    } else if (wasAsked) {
       button.disabled = true;
       button.textContent = "Sudah ditanyakan: " + question.text;
+    } else {
+      button.textContent = question.text;
+      button.addEventListener("click", () => askQuestion(index));
     }
 
-    button.addEventListener("click", () => askQuestion(index));
+    visibleCount++;
     choiceArea.appendChild(button);
   });
+
+  if (visibleCount === 0) {
+    const div = document.createElement("div");
+    div.className = "system-msg choices-empty";
+    div.textContent = "Belum ada pertanyaan. Cari bukti dari kontak lain.";
+    choiceArea.appendChild(div);
+  }
+
+  updateContactBadges();
 }
 
 function askQuestion(index) {
@@ -698,6 +1066,7 @@ function addEvidence(item) {
 
   evidence.push(item);
   renderEvidence();
+  updateContactBadges();
 
   setTimeout(() => {
     addSystem(`Bukti baru masuk ke Case Board: ${item.type}`);
@@ -726,6 +1095,22 @@ function renderEvidence() {
       <p><b>${item.type}</b> — ${item.desc}</p>
     `;
     evidenceList.appendChild(card);
+  });
+}
+
+function updateContactBadges() {
+  Object.keys(suspects).forEach((name) => {
+    const contact = document.getElementById("contact-" + name);
+    if (!contact) return;
+
+    const available = suspects[name].questions.filter((q, index) => {
+      return questionUnlocked(q) && !askedQuestions[name].includes(index);
+    }).length;
+
+    const nameEl = contact.querySelector(".contact-name");
+    if (nameEl) {
+      nameEl.textContent = available > 0 ? `${suspects[name].name} (${available})` : suspects[name].name;
+    }
   });
 }
 
