@@ -30,7 +30,8 @@ const suspects = {
           title: "Alibi Raka tidak sepenuhnya diam",
           desc:
             "Raka mengaku berada di meja makan, tetapi sempat menunduk mencari pemantik. Ini membuat alibinya tidak bersih, namun tidak otomatis membuktikan ia mencuri.",
-          type: "Alibi"
+          type: "Alibi",
+          suspicion: { Raka: 1 }
         }
       },
       {
@@ -44,7 +45,8 @@ const suspects = {
           title: "Waktu Raka ke koridor diperdebatkan",
           desc:
             "Raka membantah berada di koridor saat lampu mati. Ada konflik keterangan antara Raka dan Bima, sehingga ini menjadi clue yang belum pasti.",
-          type: "Kontradiksi"
+          type: "Kontradiksi",
+          suspicion: { Raka: 1 }
         }
       },
       {
@@ -56,7 +58,8 @@ const suspects = {
           title: "Raka punya motif lemah",
           desc:
             "Raka mengakui punya utang, tetapi motifnya lemah dan belum ada bukti fisik yang menghubungkannya langsung dengan jam.",
-          type: "Pengalih"
+          type: "Pengalih",
+          suspicion: { Raka: 1 }
         }
       },
       {
@@ -68,7 +71,8 @@ const suspects = {
           title: "Suara gelang dekat piano",
           desc:
             "Raka mendengar suara gelang perempuan dari arah piano saat lampu padam. Ini bertabrakan dengan klaim Sinta bahwa Doni paling dekat dengan jam.",
-          type: "Kunci"
+          type: "Kunci",
+          suspicion: { Sinta: 2, Doni: -1 }
         }
       }
     ]
@@ -114,7 +118,8 @@ const suspects = {
           title: "Sinta sempat masuk dapur",
           desc:
             "Sinta sempat masuk dapur sebelum lampu padam dan punya kesempatan mendekati area tempat kunci panel biasa disimpan.",
-          type: "Kesempatan"
+          type: "Kesempatan",
+          suspicion: { Sinta: 1 }
         }
       },
       {
@@ -126,7 +131,8 @@ const suspects = {
           title: "Doni jauh dari piano setelah lampu nyala",
           desc:
             "Mira melihat Doni di dekat pintu kaca setelah lampu menyala, bukan di dekat piano. Ini melemahkan tuduhan langsung terhadap Doni.",
-          type: "Kontradiksi"
+          type: "Kontradiksi",
+          suspicion: { Doni: -1 }
         }
       },
       {
@@ -138,7 +144,8 @@ const suspects = {
           title: "Serat kain merah muda dekat piano",
           desc:
             "Mira menemukan serat kain merah muda kecil di dekat piano setelah acara. Ini berpotensi mengarah ke pakaian atau aksesori salah satu tamu.",
-          type: "Fisik"
+          type: "Fisik",
+          suspicion: { Sinta: 1 }
         }
       }
     ]
@@ -160,7 +167,8 @@ const suspects = {
           title: "Motif bisnis Doni",
           desc:
             "Doni punya konflik pembayaran dengan Pak Adrian. Ini motif kuat secara emosional, tetapi belum membuktikan akses atau tindakan pencurian.",
-          type: "Motif"
+          type: "Motif",
+          suspicion: { Doni: 2 }
         }
       },
       {
@@ -172,7 +180,8 @@ const suspects = {
           title: "Doni mengaku di pintu kaca",
           desc:
             "Doni mengaku berada di dekat pintu kaca saat lampu padam, bukan di dekat piano. Keterangan ini cocok dengan sebagian keterangan Mira.",
-          type: "Alibi"
+          type: "Alibi",
+          suspicion: { Doni: -1 }
         }
       },
       {
@@ -186,7 +195,8 @@ const suspects = {
           title: "Doni keluar setelah lampu menyala",
           desc:
             "Doni membedakan waktu keluar halaman: setelah lampu menyala. Jika benar, maka ia tidak keluar membawa jam saat momen gelap.",
-          type: "Kronologi"
+          type: "Kronologi",
+          suspicion: { Doni: -1 }
         }
       },
       {
@@ -198,7 +208,8 @@ const suspects = {
           title: "Sinta muncul dari arah piano",
           desc:
             "Doni melihat Sinta muncul dari arah piano setelah lampu menyala. Ini bertentangan dengan klaim Sinta tentang posisinya.",
-          type: "Kunci"
+          type: "Kunci",
+          suspicion: { Sinta: 2 }
         }
       },
       {
@@ -226,7 +237,8 @@ const suspects = {
           title: "Sinta mengarahkan tuduhan ke Doni",
           desc:
             "Sinta sangat cepat mengarahkan kecurigaan ke Doni. Ini bisa membantu, tetapi juga bisa menjadi upaya mengalihkan perhatian.",
-          type: "Pengalih"
+          type: "Pengalih",
+          suspicion: { Doni: 1, Sinta: 1 }
         }
       },
       {
@@ -238,7 +250,8 @@ const suspects = {
           title: "Sinta mengaku dekat pintu depan",
           desc:
             "Sinta mengklaim berada dekat pintu depan saat lampu padam. Keterangan ini bertabrakan dengan keterangan Raka dan Doni.",
-          type: "Kontradiksi"
+          type: "Kontradiksi",
+          suspicion: { Sinta: 2 }
         }
       },
       {
@@ -252,7 +265,8 @@ const suspects = {
           title: "Alasan tisu Sinta",
           desc:
             "Sinta mengakui masuk dapur, tetapi mengaku hanya mengambil tisu. Ini tetap memberinya kesempatan mendekati area laci kunci panel.",
-          type: "Kesempatan"
+          type: "Kesempatan",
+          suspicion: { Sinta: 1 }
         }
       },
       {
@@ -266,7 +280,8 @@ const suspects = {
           title: "Sinta memakai scarf pink",
           desc:
             "Sinta mengakui memakai scarf pink. Ini cocok dengan serat merah muda yang ditemukan dekat piano, tetapi belum final tanpa clue lain.",
-          type: "Fisik"
+          type: "Fisik",
+          suspicion: { Sinta: 2 }
         }
       },
       {
@@ -278,7 +293,8 @@ const suspects = {
           title: "Motif lama Sinta",
           desc:
             "Sinta punya kekecewaan lama terhadap Pak Adrian terkait janji bantuan pameran amal. Motif ini lebih personal daripada sekadar uang.",
-          type: "Motif"
+          type: "Motif",
+          suspicion: { Sinta: 2 }
         }
       },
       {
@@ -290,7 +306,8 @@ const suspects = {
           title: "Sinta memperhatikan jam sejak awal",
           desc:
             "Sinta mengaku memperhatikan jam karena desainnya. Ia punya awareness tinggi terhadap posisi dan nilai jam sebelum hilang.",
-          type: "Kesempatan"
+          type: "Kesempatan",
+          suspicion: { Sinta: 1 }
         }
       }
     ]
@@ -312,7 +329,8 @@ const suspects = {
           title: "Livia tahu lokasi panel",
           desc:
             "Livia mengetahui lokasi panel listrik walau mengaku tidak mengatur listrik. Ini membuatnya punya kesempatan teknis, tapi bukan bukti pencurian.",
-          type: "Kesempatan"
+          type: "Kesempatan",
+          suspicion: { Livia: 1 }
         }
       },
       {
@@ -336,7 +354,8 @@ const suspects = {
           title: "Livia melihat Sinta dekat piano",
           desc:
             "Livia melihat Sinta dekat piano setelah lampu menyala dan langsung mengalihkan perhatian ke Doni.",
-          type: "Kunci"
+          type: "Kunci",
+          suspicion: { Sinta: 2 }
         }
       },
       {
@@ -360,7 +379,8 @@ const suspects = {
           title: "Doni terlalu mudah dijadikan tersangka",
           desc:
             "Livia menilai tuduhan terhadap Doni terlalu jelas dan bisa jadi sengaja dibentuk sebagai pengalih perhatian.",
-          type: "Analisis"
+          type: "Analisis",
+          suspicion: { Doni: -1 }
         }
       }
     ]
@@ -394,7 +414,8 @@ const suspects = {
           title: "Doni terekam setelah blackout",
           desc:
             "Kamera halaman merekam Doni pukul 20:26, setelah lampu ruang tengah kembali menyala. Ini melemahkan narasi bahwa Doni kabur saat gelap.",
-          type: "Kontradiksi"
+          type: "Kontradiksi",
+          suspicion: { Doni: -2 }
         }
       },
       {
@@ -406,7 +427,8 @@ const suspects = {
           title: "Siluet koridor tidak pasti",
           desc:
             "Bima awalnya menyebut Raka, tetapi mengakui siluet koridor tidak pasti. Ini membuat kecurigaan terhadap Raka menjadi lemah.",
-          type: "Pengalih"
+          type: "Pengalih",
+          suspicion: { Raka: -1 }
         }
       },
       {
@@ -418,7 +440,8 @@ const suspects = {
           title: "Clutch Sinta cukup untuk jam",
           desc:
             "Bima mencatat Sinta membawa clutch kecil yang cukup untuk menyimpan jam tanpa kotak. Ini memberi kemungkinan metode penyembunyian.",
-          type: "Kesempatan"
+          type: "Kesempatan",
+          suspicion: { Sinta: 1 }
         }
       },
       {
@@ -430,7 +453,8 @@ const suspects = {
           title: "Parfum floral dekat panel",
           desc:
             "Area panel tercium parfum floral kuat setelah pintu gudang terbuka pukul 20:21. Ini bisa menghubungkan pelaku dengan area panel listrik.",
-          type: "Fisik"
+          type: "Fisik",
+          suspicion: { Sinta: 1 }
         }
       }
     ]
@@ -464,7 +488,8 @@ const suspects = {
           title: "Beberapa orang tahu jam dilepas",
           desc:
             "Raka dan Sinta jelas mengetahui keberadaan jam. Doni justru terlihat tidak terlalu memperhatikan menurut korban.",
-          type: "Kronologi"
+          type: "Kronologi",
+          suspicion: { Raka: 1, Sinta: 1 }
         }
       },
       {
@@ -476,7 +501,8 @@ const suspects = {
           title: "Kekecewaan Sinta dikonfirmasi",
           desc:
             "Pak Adrian mengonfirmasi bahwa Sinta tersinggung karena bantuan dana acara amal dibatalkan. Ini memperkuat motif personal Sinta.",
-          type: "Motif"
+          type: "Motif",
+          suspicion: { Sinta: 2 }
         }
       },
       {
@@ -488,7 +514,8 @@ const suspects = {
           title: "Sinta tahu gravir jam",
           desc:
             "Sinta mengetahui detail gravir di belakang jam. Ini menunjukkan ia punya perhatian khusus terhadap jam sebelum malam kejadian.",
-          type: "Kunci"
+          type: "Kunci",
+          suspicion: { Sinta: 2 }
         }
       },
       {
@@ -500,7 +527,8 @@ const suspects = {
           title: "Korban ragu Doni pelaku",
           desc:
             "Pak Adrian menganggap Doni punya motif bisnis, tetapi tindakan mencuri jam tidak cocok dengan kepentingan Doni.",
-          type: "Analisis"
+          type: "Analisis",
+          suspicion: { Doni: -1 }
         }
       }
     ]
@@ -521,7 +549,8 @@ function addUnlockedQuestions() {
         title: "Raka menguatkan sosok perempuan dekat piano",
         desc:
           "Setelah dibandingkan dengan keterangan Doni dan Livia, Raka menguatkan bahwa suara yang ia dengar lebih cocok dengan aksesori perempuan di dekat piano.",
-        type: "Kunci"
+        type: "Kunci",
+        suspicion: { Sinta: 2 }
       }
     },
     {
@@ -535,7 +564,8 @@ function addUnlockedQuestions() {
         title: "Raka merasa dijadikan pengalih",
         desc:
           "Setelah keterangan Bima melemah, dugaan terhadap Raka makin tampak sebagai jalur pengalih, bukan rantai bukti utama.",
-        type: "Analisis"
+        type: "Analisis",
+        suspicion: { Raka: -2 }
       }
     }
   );
@@ -552,7 +582,8 @@ function addUnlockedQuestions() {
         title: "Sinta punya akses langsung ke laci kunci panel",
         desc:
           "Alasan mengambil tisu menempatkan Sinta tepat di samping laci kunci panel, sehingga ia punya kesempatan realistis mengambil atau mengembalikan kunci.",
-        type: "Kesempatan"
+        type: "Kesempatan",
+        suspicion: { Sinta: 2 }
       }
     },
     {
@@ -566,7 +597,8 @@ function addUnlockedQuestions() {
         title: "Mira mengenali parfum floral Sinta",
         desc:
           "Mira menghubungkan bau parfum floral di area panel dengan parfum Sinta, memperkuat hubungan Sinta dengan lokasi pemadaman.",
-        type: "Fisik"
+        type: "Fisik",
+        suspicion: { Sinta: 2 }
       }
     }
   );
@@ -583,7 +615,8 @@ function addUnlockedQuestions() {
         title: "Timeline Doni makin kuat",
         desc:
           "Doni menggunakan rekaman halaman untuk membela diri: ia keluar setelah lampu menyala, bukan saat ruang tengah gelap.",
-        type: "Alibi"
+        type: "Alibi",
+        suspicion: { Doni: -2 }
       }
     },
     {
@@ -597,7 +630,8 @@ function addUnlockedQuestions() {
         title: "Doni menjadi target tuduhan paling mudah",
         desc:
           "Doni punya motif yang terlalu jelas, sehingga ia cocok dijadikan kambing hitam oleh pelaku yang ingin mengalihkan fokus.",
-        type: "Analisis"
+        type: "Analisis",
+        suspicion: { Doni: -1, Sinta: 1 }
       }
     }
   );
@@ -614,7 +648,8 @@ function addUnlockedQuestions() {
         title: "Sinta mengakui memakai gelang",
         desc:
           "Sinta mengakui memakai gelang setelah dikonfrontasi dengan suara gelang dekat piano. Jawabannya defensif dan tidak sepenuhnya membantah lokasi.",
-        type: "Kunci"
+        type: "Kunci",
+        suspicion: { Sinta: 2 }
       }
     },
     {
@@ -628,7 +663,8 @@ function addUnlockedQuestions() {
         title: "Sinta defensif soal serat scarf",
         desc:
           "Sinta tidak membantah kecocokan serat pink, tetapi mencoba menggeser waktunya. Ini membuat bukti fisik tetap relevan.",
-        type: "Fisik"
+        type: "Fisik",
+        suspicion: { Sinta: 2 }
       }
     },
     {
@@ -642,7 +678,8 @@ function addUnlockedQuestions() {
         title: "Sinta mengingat detail personal jam",
         desc:
           "Sinta mengakui mengingat gravir jam. Ini menguatkan bahwa ia memahami nilai emosional jam, bukan hanya harganya.",
-        type: "Motif"
+        type: "Motif",
+        suspicion: { Sinta: 2 }
       }
     },
     {
@@ -656,7 +693,8 @@ function addUnlockedQuestions() {
         title: "Sinta membantah laci kunci tanpa alibi kuat",
         desc:
           "Sinta membantah membuka laci, tetapi posisinya tetap memberi kesempatan. Bantahannya tidak menghapus hubungan dengan akses panel.",
-        type: "Kontradiksi"
+        type: "Kontradiksi",
+        suspicion: { Sinta: 2 }
       }
     }
   );
@@ -673,7 +711,8 @@ function addUnlockedQuestions() {
         title: "Livia menegaskan posisi Sinta janggal",
         desc:
           "Setelah klaim Sinta dibandingkan dengan keterangan Doni, Livia makin yakin posisi Sinta dekat piano dan bukan dekat pintu depan.",
-        type: "Kunci"
+        type: "Kunci",
+        suspicion: { Sinta: 2 }
       }
     },
     {
@@ -687,7 +726,8 @@ function addUnlockedQuestions() {
         title: "Perilaku Sinta terhadap clutch berubah",
         desc:
           "Livia melihat Sinta memegang clutch lebih rapat setelah lampu menyala. Ini mendukung kemungkinan jam disembunyikan di dalam clutch.",
-        type: "Kesempatan"
+        type: "Kesempatan",
+        suspicion: { Sinta: 2 }
       }
     }
   );
@@ -704,7 +744,8 @@ function addUnlockedQuestions() {
         title: "Sinta sempat ke toilet tanpa kamera langsung",
         desc:
           "Sinta masuk ke toilet tamu setelah kejadian. Area itu tidak terekam langsung, memberi kesempatan memindahkan atau menyembunyikan jam.",
-        type: "Kronologi"
+        type: "Kronologi",
+        suspicion: { Sinta: 2 }
       }
     },
     {
@@ -718,7 +759,8 @@ function addUnlockedQuestions() {
         title: "Parfum floral juga tercium dekat toilet",
         desc:
           "Bau floral muncul di dua lokasi penting: panel listrik dan lorong toilet. Ini menghubungkan jalur gerak Sinta setelah blackout.",
-        type: "Fisik"
+        type: "Fisik",
+        suspicion: { Sinta: 3 }
       }
     }
   );
@@ -735,7 +777,8 @@ function addUnlockedQuestions() {
         title: "Sinta tahu kebiasaan Adrian melepas jam",
         desc:
           "Sinta bukan hanya tahu gravir, tetapi juga tahu kebiasaan Pak Adrian melepas jam saat tidak nyaman. Ini menjelaskan kenapa ia siap memanfaatkan momen.",
-        type: "Kunci"
+        type: "Kunci",
+        suspicion: { Sinta: 3 }
       }
     },
     {
@@ -749,7 +792,8 @@ function addUnlockedQuestions() {
         title: "Rantai bukti Doni tidak utuh",
         desc:
           "Pak Adrian menilai bukti terhadap Doni tidak membentuk rantai lengkap, mengarahkan pemain untuk mencari pelaku dengan motif personal dan kesempatan teknis.",
-        type: "Analisis"
+        type: "Analisis",
+        suspicion: { Doni: -2, Sinta: 1 }
       }
     }
   );
@@ -762,6 +806,30 @@ function addUnlockedQuestions() {
 addUnlockedQuestions();
 
 const correctCulprit = "Sinta";
+
+// Highest possible suspicion score per suspect, used to turn raw points into a 0-100% meter.
+let maxSuspicion = {};
+
+function computeMaxSuspicion() {
+  maxSuspicion = {};
+  Object.keys(suspects).forEach((name) => {
+    maxSuspicion[name] = 0;
+  });
+
+  Object.values(suspects).forEach((suspect) => {
+    suspect.questions.forEach((question) => {
+      if (!question.evidence || !question.evidence.suspicion) return;
+
+      Object.entries(question.evidence.suspicion).forEach(([target, value]) => {
+        if (value > 0) {
+          maxSuspicion[target] = (maxSuspicion[target] || 0) + value;
+        }
+      });
+    });
+  });
+}
+
+computeMaxSuspicion();
 
 let currentSuspect = null;
 let evidence = [];
@@ -783,6 +851,7 @@ let result;
 let caseBoard;
 let drawerOverlay;
 let suspectSelect;
+let suspicionBoard;
 
 function iconSvg() {
   return `
@@ -816,6 +885,7 @@ function initElements() {
   caseBoard = document.getElementById("caseBoard");
   drawerOverlay = document.getElementById("drawerOverlay");
   suspectSelect = document.getElementById("suspectSelect");
+  suspicionBoard = document.getElementById("suspicionBoard");
 }
 
 function initGame() {
@@ -825,6 +895,7 @@ function initGame() {
   chatLogs = {};
   unlockedNoticesShown = {};
   pendingReplies = {};
+  lastSuspicionPct = {};
   currentSuspect = null;
 
   Object.keys(suspects).forEach((name) => {
@@ -856,6 +927,7 @@ function initGame() {
   result.textContent = "Belum ada keputusan.";
   suspectSelect.value = "";
   renderEvidence();
+  renderSuspicion();
   updateContactBadges();
 }
 
@@ -1199,6 +1271,7 @@ function addEvidence(item, sourceSuspect = currentSuspect) {
 
   evidence.push(item);
   renderEvidence();
+  renderSuspicion();
   updateContactBadges();
 
   if (currentSuspect) {
@@ -1233,6 +1306,69 @@ function renderEvidence() {
     `;
     evidenceList.appendChild(card);
   });
+}
+
+function getSuspicionScores() {
+  const scores = {};
+  Object.keys(suspects).forEach((name) => {
+    scores[name] = 0;
+  });
+
+  evidence.forEach((item) => {
+    if (!item.suspicion) return;
+    Object.entries(item.suspicion).forEach(([target, value]) => {
+      if (!(target in scores)) return;
+      scores[target] += value;
+    });
+  });
+
+  Object.keys(scores).forEach((name) => {
+    if (scores[name] < 0) scores[name] = 0;
+  });
+
+  return scores;
+}
+
+let lastSuspicionPct = {};
+
+function renderSuspicion() {
+  if (!suspicionBoard) return;
+
+  const scores = getSuspicionScores();
+
+  const order = Object.keys(suspects).sort((a, b) => {
+    const pa = maxSuspicion[a] ? scores[a] / maxSuspicion[a] : 0;
+    const pb = maxSuspicion[b] ? scores[b] / maxSuspicion[b] : 0;
+    return pb - pa;
+  });
+
+  suspicionBoard.innerHTML = order
+    .map((name) => {
+      const max = maxSuspicion[name] || 0;
+      const pct = max > 0 ? Math.max(0, Math.min(100, Math.round((scores[name] / max) * 100))) : 0;
+
+      let level = "low";
+      if (pct >= 66) level = "high";
+      else if (pct >= 33) level = "mid";
+
+      const prevPct = lastSuspicionPct[name] || 0;
+      let trendClass = "";
+      if (pct > prevPct) trendClass = " trend-up";
+      else if (pct < prevPct) trendClass = " trend-down";
+
+      lastSuspicionPct[name] = pct;
+
+      return `
+        <div class="suspicion-row${trendClass}">
+          <div class="suspicion-name">${suspects[name].name.replace(/^Pak /, "")}</div>
+          <div class="suspicion-bar-track">
+            <div class="suspicion-bar-fill ${level}" style="width:${pct}%"></div>
+          </div>
+          <div class="suspicion-pct">${pct}%</div>
+        </div>
+      `;
+    })
+    .join("");
 }
 
 function updateContactBadges() {
