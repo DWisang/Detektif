@@ -164,17 +164,18 @@ let currentSuspect = null;
 let evidence = [];
 let askedQuestions = {};
 
-const contacts = document.getElementById("contacts");
-const chatWindow = document.getElementById("chatWindow");
-const choiceArea = document.getElementById("choiceArea");
-const chatName = document.getElementById("chatName");
-const chatRole = document.getElementById("chatRole");
-const headerAvatar = document.getElementById("headerAvatar");
-const evidenceList = document.getElementById("evidenceList");
-const progressText = document.getElementById("progressText");
-const result = document.getElementById("result");
-const caseBoard = document.getElementById("caseBoard");
-const drawerOverlay = document.getElementById("drawerOverlay");
+let contacts;
+let chatWindow;
+let choiceArea;
+let chatName;
+let chatRole;
+let headerAvatar;
+let evidenceList;
+let progressText;
+let result;
+let caseBoard;
+let drawerOverlay;
+let suspectSelect;
 
 function iconSvg() {
   return `
@@ -196,10 +197,26 @@ function avatar(name, className = "avatar") {
   `;
 }
 
+function initElements() {
+  contacts = document.getElementById("contacts");
+  chatWindow = document.getElementById("chatWindow");
+  choiceArea = document.getElementById("choiceArea");
+  chatName = document.getElementById("chatName");
+  chatRole = document.getElementById("chatRole");
+  headerAvatar = document.getElementById("headerAvatar");
+  evidenceList = document.getElementById("evidenceList");
+  progressText = document.getElementById("progressText");
+  result = document.getElementById("result");
+  caseBoard = document.getElementById("caseBoard");
+  drawerOverlay = document.getElementById("drawerOverlay");
+  suspectSelect = document.getElementById("suspectSelect");
+}
+
 function initGame() {
   contacts.innerHTML = "";
   evidence = [];
   askedQuestions = {};
+  currentSuspect = null;
 
   Object.keys(suspects).forEach((name) => {
     askedQuestions[name] = [];
@@ -208,7 +225,7 @@ function initGame() {
     button.className = "contact";
     button.id = "contact-" + name;
     button.type = "button";
-    button.onclick = () => selectSuspect(name);
+    button.addEventListener("click", () => selectSuspect(name));
 
     button.innerHTML = `
       ${avatar(name)}
@@ -225,12 +242,23 @@ function initGame() {
     '<div class="system-msg">Pilih kontak di kiri untuk mulai interogasi</div>';
   choiceArea.innerHTML = "";
   result.textContent = "Belum ada keputusan.";
+  suspectSelect.value = "";
+
   renderEvidence();
 }
 
 function startGame() {
   const introScreen = document.getElementById("introScreen");
-  introScreen.classList.add("hide");
+
+  if (introScreen) {
+    introScreen.classList.add("hide");
+  }
+
+  if (!currentSuspect) {
+    chatWindow.innerHTML =
+      '<div class="system-msg">Pilih kontak di kiri untuk mulai interogasi</div>';
+    choiceArea.innerHTML = "";
+  }
 }
 
 function selectSuspect(name) {
@@ -240,7 +268,11 @@ function selectSuspect(name) {
     contact.classList.remove("active");
   });
 
-  document.getElementById("contact-" + name).classList.add("active");
+  const selectedContact = document.getElementById("contact-" + name);
+
+  if (selectedContact) {
+    selectedContact.classList.add("active");
+  }
 
   chatName.textContent = suspects[name].name;
   chatRole.textContent = suspects[name].role + " • Aktif";
@@ -299,7 +331,7 @@ function renderChoices() {
       button.textContent = "Sudah ditanyakan: " + question.text;
     }
 
-    button.onclick = () => askQuestion(index);
+    button.addEventListener("click", () => askQuestion(index));
 
     choiceArea.appendChild(button);
   });
@@ -373,7 +405,7 @@ function renderEvidence() {
 }
 
 function accuse() {
-  const selected = document.getElementById("suspectSelect").value;
+  const selected = suspectSelect.value;
 
   if (!selected) {
     result.textContent = "Pilih tersangka dulu.";
@@ -401,16 +433,14 @@ function accuse() {
 }
 
 function restartGame() {
-  currentSuspect = null;
-  evidence = [];
-  askedQuestions = {};
-
-  document.getElementById("suspectSelect").value = "";
   closeCaseBoard();
   initGame();
 
   const introScreen = document.getElementById("introScreen");
-  introScreen.classList.remove("hide");
+
+  if (introScreen) {
+    introScreen.classList.remove("hide");
+  }
 }
 
 function openCaseBoard() {
@@ -429,10 +459,43 @@ function updateClock() {
   const h = String(now.getHours()).padStart(2, "0");
   const m = String(now.getMinutes()).padStart(2, "0");
 
-  document.getElementById("clock").textContent = `${h}:${m}`;
+  const clock = document.getElementById("clock");
+
+  if (clock) {
+    clock.textContent = `${h}:${m}`;
+  }
 }
 
-updateClock();
-setInterval(updateClock, 30000);
+document.addEventListener("DOMContentLoaded", () => {
+  initElements();
 
-initGame();
+  const startBtn = document.getElementById("startBtn");
+  const caseBtn = document.getElementById("caseBtn");
+  const accuseBtn = document.getElementById("accuseBtn");
+  const restartBtn = document.getElementById("restartBtn");
+
+  if (startBtn) {
+    startBtn.addEventListener("click", startGame);
+  }
+
+  if (caseBtn) {
+    caseBtn.addEventListener("click", openCaseBoard);
+  }
+
+  if (drawerOverlay) {
+    drawerOverlay.addEventListener("click", closeCaseBoard);
+  }
+
+  if (accuseBtn) {
+    accuseBtn.addEventListener("click", accuse);
+  }
+
+  if (restartBtn) {
+    restartBtn.addEventListener("click", restartGame);
+  }
+
+  updateClock();
+  setInterval(updateClock, 30000);
+
+  initGame();
+});
