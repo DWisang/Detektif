@@ -7,16 +7,19 @@ const suspects = {
     questions: [
       {
         text: "Kamu terakhir lihat jam itu kapan?",
-        answer: "Aku lihat jam itu masih dipakai Pak Adrian sekitar jam 20:10, pas dia ngobrol di ruang tamu.",
+        answer:
+          "Aku lihat jam itu masih dipakai Pak Adrian sekitar jam 20:10, pas dia ngobrol di ruang tamu.",
         evidence: {
           id: "jam_2010",
           title: "Jam terlihat pukul 20:10",
-          desc: "Raka melihat Pak Adrian masih memakai jamnya sekitar pukul 20:10."
+          desc:
+            "Raka melihat Pak Adrian masih memakai jamnya sekitar pukul 20:10."
         }
       },
       {
         text: "Kamu ada di mana saat lampu mati?",
-        answer: "Aku di dekat meja makan. Banyak orang lihat kok. Aku lagi ambil minum.",
+        answer:
+          "Aku di dekat meja makan. Banyak orang lihat kok. Aku lagi ambil minum.",
         evidence: {
           id: "alibi_raka",
           title: "Alibi Raka",
@@ -25,7 +28,8 @@ const suspects = {
       },
       {
         text: "Siapa yang menurutmu mencurigakan?",
-        answer: "Doni agak aneh. Setelah lampu nyala, dia tiba-tiba keluar ke halaman belakang.",
+        answer:
+          "Doni agak aneh. Setelah lampu nyala, dia tiba-tiba keluar ke halaman belakang.",
         evidence: null
       }
     ]
@@ -35,11 +39,13 @@ const suspects = {
     name: "Mira",
     role: "Asisten rumah",
     colors: ["#ff7675", "#fd79a8"],
-    intro: "Saya cuma bantu beres-beres. Saya tidak berani menyentuh barang mahal.",
+    intro:
+      "Saya cuma bantu beres-beres. Saya tidak berani menyentuh barang mahal.",
     questions: [
       {
         text: "Kamu berada di mana saat kejadian?",
-        answer: "Saya di dapur. Waktu lampu mati, saya sedang mengambil piring tambahan.",
+        answer:
+          "Saya di dapur. Waktu lampu mati, saya sedang mengambil piring tambahan.",
         evidence: {
           id: "alibi_mira",
           title: "Alibi Mira",
@@ -48,20 +54,24 @@ const suspects = {
       },
       {
         text: "Kamu melihat siapa yang keluar rumah?",
-        answer: "Saya lihat Doni keluar ke halaman belakang. Katanya menerima telepon, tapi saya tidak dengar suara telepon.",
+        answer:
+          "Saya lihat Doni keluar ke halaman belakang. Katanya menerima telepon, tapi saya tidak dengar suara telepon.",
         evidence: {
           id: "doni_keluar",
           title: "Doni keluar ke halaman",
-          desc: "Mira melihat Doni keluar ke halaman belakang setelah lampu mati."
+          desc:
+            "Mira melihat Doni keluar ke halaman belakang setelah lampu mati."
         }
       },
       {
         text: "Posisi jam terakhir di mana?",
-        answer: "Saya sempat lihat jam itu diletakkan di meja kecil dekat sofa.",
+        answer:
+          "Saya sempat lihat jam itu diletakkan di meja kecil dekat sofa.",
         evidence: {
           id: "jam_meja",
           title: "Jam di meja kecil",
-          desc: "Menurut Mira, jam sempat diletakkan di meja kecil dekat sofa."
+          desc:
+            "Menurut Mira, jam sempat diletakkan di meja kecil dekat sofa."
         }
       }
     ]
@@ -75,25 +85,30 @@ const suspects = {
     questions: [
       {
         text: "Kamu keluar rumah setelah lampu menyala?",
-        answer: "Iya, saya keluar sebentar. Ada panggilan penting dari kantor.",
+        answer:
+          "Iya, saya keluar sebentar. Ada panggilan penting dari kantor.",
         evidence: null
       },
       {
         text: "Kenapa Mira bilang tidak dengar suara telepon?",
-        answer: "Sinyal jelek. Jadi saya sebenarnya cuma cek pesan, bukan bicara lama.",
+        answer:
+          "Sinyal jelek. Jadi saya sebenarnya cuma cek pesan, bukan bicara lama.",
         evidence: {
           id: "alasan_doni",
           title: "Alasan Doni berubah",
-          desc: "Doni awalnya bilang menerima panggilan, lalu berubah menjadi hanya mengecek pesan."
+          desc:
+            "Doni awalnya bilang menerima panggilan, lalu berubah menjadi hanya mengecek pesan."
         }
       },
       {
         text: "Kamu punya masalah dengan Pak Adrian?",
-        answer: "Masalah bisnis biasa. Dia menunda pembayaran proyek saya, tapi itu bukan alasan untuk mencuri.",
+        answer:
+          "Masalah bisnis biasa. Dia menunda pembayaran proyek saya, tapi itu bukan alasan untuk mencuri.",
         evidence: {
           id: "motif_doni",
           title: "Motif Doni",
-          desc: "Doni punya masalah pembayaran proyek dengan Pak Adrian."
+          desc:
+            "Doni punya masalah pembayaran proyek dengan Pak Adrian."
         }
       }
     ]
@@ -103,33 +118,40 @@ const suspects = {
     name: "Sinta",
     role: "Teman korban",
     colors: ["#a29bfe", "#e84393"],
-    intro: "Aku cuma tamu. Tapi aku memang melihat beberapa hal aneh malam itu.",
+    intro:
+      "Aku cuma tamu. Tapi aku memang melihat beberapa hal aneh malam itu.",
     questions: [
       {
         text: "Apa hal paling mencurigakan yang kamu lihat?",
-        answer: "Doni sering melihat ke arah meja kecil tempat jam itu ditaruh.",
+        answer:
+          "Doni sering melihat ke arah meja kecil tempat jam itu ditaruh.",
         evidence: {
           id: "doni_lihat_meja",
           title: "Doni memperhatikan meja",
-          desc: "Sinta melihat Doni beberapa kali melihat ke arah meja kecil tempat jam berada."
+          desc:
+            "Sinta melihat Doni beberapa kali melihat ke arah meja kecil tempat jam berada."
         }
       },
       {
         text: "Saat lampu mati, siapa paling dekat dengan meja kecil?",
-        answer: "Seingatku Doni paling dekat. Raka di meja makan, Mira di dapur, aku di dekat pintu.",
+        answer:
+          "Seingatku Doni paling dekat. Raka di meja makan, Mira di dapur, aku di dekat pintu.",
         evidence: {
           id: "doni_terdekat",
           title: "Doni paling dekat dengan jam",
-          desc: "Saat lampu mati, Doni adalah orang yang paling dekat dengan meja kecil."
+          desc:
+            "Saat lampu mati, Doni adalah orang yang paling dekat dengan meja kecil."
         }
       },
       {
         text: "Kamu lihat sesuatu setelah Doni keluar?",
-        answer: "Aku lihat dia memasukkan sesuatu kecil ke saku jas. Tapi aku tidak yakin itu jam.",
+        answer:
+          "Aku lihat dia memasukkan sesuatu kecil ke saku jas. Tapi aku tidak yakin itu jam.",
         evidence: {
           id: "doni_saku",
           title: "Doni memasukkan benda ke saku",
-          desc: "Sinta melihat Doni memasukkan benda kecil ke saku jasnya."
+          desc:
+            "Sinta melihat Doni memasukkan benda kecil ke saku jasnya."
         }
       }
     ]
@@ -164,10 +186,10 @@ function iconSvg() {
 }
 
 function avatar(name, className = "avatar") {
-  const s = suspects[name];
+  const suspect = suspects[name];
 
   return `
-    <div class="${className}" style="--c1:${s.colors[0]}; --c2:${s.colors[1]}">
+    <div class="${className}" style="--c1:${suspect.colors[0]}; --c2:${suspect.colors[1]}">
       ${iconSvg()}
       ${className === "avatar" ? '<div class="online-dot"></div>' : ""}
     </div>
@@ -179,12 +201,13 @@ function initGame() {
   evidence = [];
   askedQuestions = {};
 
-  Object.keys(suspects).forEach(name => {
+  Object.keys(suspects).forEach((name) => {
     askedQuestions[name] = [];
 
     const button = document.createElement("button");
     button.className = "contact";
     button.id = "contact-" + name;
+    button.type = "button";
     button.onclick = () => selectSuspect(name);
 
     button.innerHTML = `
@@ -196,13 +219,27 @@ function initGame() {
   });
 
   headerAvatar.innerHTML = avatar("Raka", "header-avatar");
+  chatName.textContent = "Pilih kontak";
+  chatRole.textContent = "Online";
+  chatWindow.innerHTML =
+    '<div class="system-msg">Pilih kontak di kiri untuk mulai interogasi</div>';
+  choiceArea.innerHTML = "";
+  result.textContent = "Belum ada keputusan.";
   renderEvidence();
+}
+
+function startGame() {
+  const introScreen = document.getElementById("introScreen");
+  introScreen.classList.add("hide");
 }
 
 function selectSuspect(name) {
   currentSuspect = name;
 
-  document.querySelectorAll(".contact").forEach(c => c.classList.remove("active"));
+  document.querySelectorAll(".contact").forEach((contact) => {
+    contact.classList.remove("active");
+  });
+
   document.getElementById("contact-" + name).classList.add("active");
 
   chatName.textContent = suspects[name].name;
@@ -220,6 +257,7 @@ function addSystem(text) {
   const div = document.createElement("div");
   div.className = "system-msg";
   div.textContent = text;
+
   chatWindow.appendChild(div);
   chatWindow.scrollTop = chatWindow.scrollHeight;
 }
@@ -246,43 +284,58 @@ function addMessage(name, text, sender) {
 function renderChoices() {
   choiceArea.innerHTML = "";
 
-  if (!currentSuspect) return;
+  if (!currentSuspect) {
+    return;
+  }
 
-  suspects[currentSuspect].questions.forEach((q, index) => {
-    const btn = document.createElement("button");
-    btn.className = "choice-btn";
-    btn.textContent = q.text;
+  suspects[currentSuspect].questions.forEach((question, index) => {
+    const button = document.createElement("button");
+    button.className = "choice-btn";
+    button.type = "button";
+    button.textContent = question.text;
 
     if (askedQuestions[currentSuspect].includes(index)) {
-      btn.disabled = true;
-      btn.textContent = "Sudah ditanyakan";
+      button.disabled = true;
+      button.textContent = "Sudah ditanyakan: " + question.text;
     }
 
-    btn.onclick = () => askQuestion(index);
-    choiceArea.appendChild(btn);
+    button.onclick = () => askQuestion(index);
+
+    choiceArea.appendChild(button);
   });
 }
 
 function askQuestion(index) {
-  const q = suspects[currentSuspect].questions[index];
+  if (!currentSuspect) {
+    return;
+  }
+
+  const question = suspects[currentSuspect].questions[index];
+
+  if (askedQuestions[currentSuspect].includes(index)) {
+    return;
+  }
 
   askedQuestions[currentSuspect].push(index);
 
-  addMessage(currentSuspect, q.text, "player");
+  addMessage(currentSuspect, question.text, "player");
   renderChoices();
 
   setTimeout(() => {
-    addMessage(currentSuspect, q.answer, "npc");
+    addMessage(currentSuspect, question.answer, "npc");
 
-    if (q.evidence) {
-      addEvidence(q.evidence);
+    if (question.evidence) {
+      addEvidence(question.evidence);
     }
   }, 450);
 }
 
 function addEvidence(item) {
-  const exists = evidence.some(e => e.id === item.id);
-  if (exists) return;
+  const exists = evidence.some((e) => e.id === item.id);
+
+  if (exists) {
+    return;
+  }
 
   evidence.push(item);
   renderEvidence();
@@ -306,13 +359,15 @@ function renderEvidence() {
     return;
   }
 
-  evidence.forEach(e => {
+  evidence.forEach((item) => {
     const card = document.createElement("div");
     card.className = "evidence-card";
+
     card.innerHTML = `
-      <strong>${e.title}</strong>
-      <p>${e.desc}</p>
+      <strong>${item.title}</strong>
+      <p>${item.desc}</p>
     `;
+
     evidenceList.appendChild(card);
   });
 }
@@ -333,8 +388,9 @@ function accuse() {
   if (selected === correctCulprit) {
     result.innerHTML = `
       <strong>Benar.</strong><br><br>
-      Pelakunya adalah <strong>Doni</strong>. 
-      Dia punya motif, alibinya berubah, paling dekat dengan jam, dan terlihat memasukkan benda kecil ke saku.
+      Pelakunya adalah <strong>Doni</strong>.<br><br>
+      Dia punya motif, alibinya berubah, paling dekat dengan jam,
+      dan terlihat memasukkan benda kecil ke saku.
     `;
   } else {
     result.innerHTML = `
@@ -348,16 +404,13 @@ function restartGame() {
   currentSuspect = null;
   evidence = [];
   askedQuestions = {};
+
   document.getElementById("suspectSelect").value = "";
-  result.textContent = "Belum ada keputusan.";
-
-  chatName.textContent = "Pilih kontak";
-  chatRole.textContent = "Online";
-  chatWindow.innerHTML = `<div class="system-msg">Pilih kontak di kiri untuk mulai interogasi</div>`;
-  choiceArea.innerHTML = "";
-
   closeCaseBoard();
   initGame();
+
+  const introScreen = document.getElementById("introScreen");
+  introScreen.classList.remove("hide");
 }
 
 function openCaseBoard() {
@@ -372,8 +425,10 @@ function closeCaseBoard() {
 
 function updateClock() {
   const now = new Date();
+
   const h = String(now.getHours()).padStart(2, "0");
   const m = String(now.getMinutes()).padStart(2, "0");
+
   document.getElementById("clock").textContent = `${h}:${m}`;
 }
 
